@@ -44,12 +44,16 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>$(SolutionDir)bin\$(Configuration)-$(Platform)\$(ProjectName)\</OutDir>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(Platform)\Sandbox\</OutDir>
     <IntDir>$(SolutionDir)bin-int\$(Configuration)-$(Platform)\$(ProjectName)\</IntDir>
+    <IncludePath>D:\OpenGL\Projects\Liminal\Liminal\Dependencies\include;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\OpenGL\Projects\Liminal\Liminal\Dependencies\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>$(SolutionDir)bin\$(Configuration)-$(Platform)\$(ProjectName)\</OutDir>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(Platform)\Sandbox\</OutDir>
     <IntDir>$(SolutionDir)bin-int\$(Configuration)-$(Platform)\$(ProjectName)\</IntDir>
+    <IncludePath>D:\OpenGL\Projects\Liminal\Liminal\Dependencies\include;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\OpenGL\Projects\Liminal\Liminal\Dependencies\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -57,10 +61,15 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>LM_PLATFORM_WINDOWS;LM_BUILD_DLL; _DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>src;imgui;</AdditionalIncludeDirectories>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>lmpch.h</PrecompiledHeaderFile>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -71,22 +80,79 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>LM_PLATFORM_WINDOWS;LM_BUILD_DLL; NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>src;</AdditionalIncludeDirectories>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>lmpch.h</PrecompiledHeaderFile>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Dependencies\include\glad\glad.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Dependencies\include\imgui\imgui.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Dependencies\include\imgui\imgui_demo.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Dependencies\include\imgui\imgui_draw.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Dependencies\include\imgui\imgui_impl_glfw.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Dependencies\include\imgui\imgui_impl_opengl3.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Dependencies\include\imgui\imgui_tables.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Dependencies\include\imgui\imgui_widgets.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="src\Liminal\Layer.cpp" />
+    <ClCompile Include="src\Liminal\UI\ImGuiLayer.cpp" />
+    <ClCompile Include="src\Liminal\LayerStack.cpp" />
+    <ClCompile Include="src\Liminal\GraphicsAPI\OpenGLContext.cpp" />
+    <ClCompile Include="src\Liminal\Log.cpp" />
     <ClCompile Include="src\Liminal\Application.cpp" />
+    <ClCompile Include="src\lmpch.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+      </PrecompiledHeaderFile>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Dependencies\include\glad\glad.h" />
+    <ClInclude Include="Dependencies\include\imgui\imconfig.h" />
+    <ClInclude Include="Dependencies\include\imgui\imgui.h" />
+    <ClInclude Include="Dependencies\include\imgui\imgui_impl_glfw.h" />
+    <ClInclude Include="Dependencies\include\imgui\imgui_impl_opengl3.h" />
+    <ClInclude Include="Dependencies\include\imgui\imgui_impl_opengl3_loader.h" />
+    <ClInclude Include="Dependencies\include\imgui\imgui_internal.h" />
+    <ClInclude Include="Dependencies\include\imgui\imstb_rectpack.h" />
+    <ClInclude Include="Dependencies\include\imgui\imstb_textedit.h" />
+    <ClInclude Include="Dependencies\include\imgui\imstb_truetype.h" />
+    <ClInclude Include="src\Liminal\UI\ImGuiLayer.h" />
+    <ClInclude Include="src\Liminal\LayerStack.h" />
+    <ClInclude Include="src\Liminal\Layer.h" />
+    <ClInclude Include="src\Liminal\GraphicsAPI\OpenGLContext.h" />
+    <ClInclude Include="src\Liminal\GraphicsAPI\IGraphicsContext.h" />
+    <ClInclude Include="src\Liminal\Log.h" />
     <ClInclude Include="src\Liminal.h" />
     <ClInclude Include="src\Liminal\Application.h" />
     <ClInclude Include="src\Liminal\Core.h" />
     <ClInclude Include="src\Liminal\EntryPoint.h" />
+    <ClInclude Include="src\lmpch.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
