@@ -10,6 +10,3 @@
 
 // --- Entry Point -----
 #include "Liminal/EntryPoint.h"
-
-// --- GraphicsAPI -----
-#include "Liminal/GraphicsAPI/IGraphicsContext.h"

@@ -5,21 +5,17 @@ namespace Liminal
 {
 	Application* Application::instance = nullptr;
 
-	Application::Application(int width, int height, const char* title)
-		: windowWidth(width), windowHeight(height), windowTitle(title), graphicsContext(width, height, title) 
+	Application::Application()
 	{
+		LM_CORE_ASSERT(!instance, "Application already exists");
 		instance = this;
 
-		if (!graphicsContext.Init())
-		{
-			std::cerr << "Failed to initialize the graphics context." << std::endl;
-			return;
-		}
+		window = std::unique_ptr<Window>(Window::Create());
 	}
 
 	void Liminal::Application::Run()
 	{
-		while (graphicsContext.ShouldKeepRunning())
+		while (running)
 		{
 			glClearColor(0, 0, 0, 1);
 			glClear(GL_COLOR_BUFFER_BIT);
@@ -27,8 +23,8 @@ namespace Liminal
 			for (Layer* layer : layerStack)
 				layer->OnUpdate();
 
-			// Swap buffers and handle events
-			graphicsContext.SwapBuffersAndPollEvents();
+			
+			window->OnUpdate();
 		}
 	}
 	void Application::PushLayer(Layer* layer)

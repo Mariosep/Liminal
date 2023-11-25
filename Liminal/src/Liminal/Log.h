@@ -5,7 +5,7 @@
 
 namespace Liminal
 {
-	class LIMINAL_API Log
+	class Log
 	{
 	public:
 		static void Init();

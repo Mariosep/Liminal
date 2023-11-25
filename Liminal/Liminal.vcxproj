@@ -19,13 +19,13 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -59,7 +59,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>LM_PLATFORM_WINDOWS;LM_BUILD_DLL; _DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>LM_ENABLE_ASSERTS;LM_PLATFORM_WINDOWS;LM_BUILD_DLL; _DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>src;imgui;</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
@@ -71,6 +71,9 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>glfw3.lib;opengl32.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <Lib>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;</AdditionalDependencies>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -80,7 +83,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>LM_PLATFORM_WINDOWS;LM_BUILD_DLL; NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>src;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;imgui;</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>lmpch.h</PrecompiledHeaderFile>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
@@ -92,6 +95,9 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>glfw3.lib;opengl32.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <Lib>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;</AdditionalDependencies>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Dependencies\include\glad\glad.c">
@@ -118,10 +124,10 @@
     <ClCompile Include="Dependencies\include\imgui\imgui_widgets.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="src\Liminal\Render\RendererLayer.cpp" />
     <ClCompile Include="src\Liminal\Layer.cpp" />
     <ClCompile Include="src\Liminal\UI\ImGuiLayer.cpp" />
     <ClCompile Include="src\Liminal\LayerStack.cpp" />
-    <ClCompile Include="src\Liminal\GraphicsAPI\OpenGLContext.cpp" />
     <ClCompile Include="src\Liminal\Log.cpp" />
     <ClCompile Include="src\Liminal\Application.cpp" />
     <ClCompile Include="src\lmpch.cpp">
@@ -130,6 +136,7 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
       </PrecompiledHeaderFile>
     </ClCompile>
+    <ClCompile Include="src\Liminal\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Dependencies\include\glad\glad.h" />
@@ -142,17 +149,17 @@
     <ClInclude Include="Dependencies\include\imgui\imstb_rectpack.h" />
     <ClInclude Include="Dependencies\include\imgui\imstb_textedit.h" />
     <ClInclude Include="Dependencies\include\imgui\imstb_truetype.h" />
+    <ClInclude Include="src\Liminal\Render\RendererLayer.h" />
     <ClInclude Include="src\Liminal\UI\ImGuiLayer.h" />
     <ClInclude Include="src\Liminal\LayerStack.h" />
     <ClInclude Include="src\Liminal\Layer.h" />
-    <ClInclude Include="src\Liminal\GraphicsAPI\OpenGLContext.h" />
-    <ClInclude Include="src\Liminal\GraphicsAPI\IGraphicsContext.h" />
     <ClInclude Include="src\Liminal\Log.h" />
     <ClInclude Include="src\Liminal.h" />
     <ClInclude Include="src\Liminal\Application.h" />
     <ClInclude Include="src\Liminal\Core.h" />
     <ClInclude Include="src\Liminal\EntryPoint.h" />
     <ClInclude Include="src\lmpch.h" />
+    <ClInclude Include="src\Liminal\Window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

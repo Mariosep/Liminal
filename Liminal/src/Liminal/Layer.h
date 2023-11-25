@@ -4,7 +4,7 @@
 
 namespace Liminal
 {
-	class LIMINAL_API Layer
+	class Layer
 	{
 	public:
 		Layer();

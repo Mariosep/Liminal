@@ -5,7 +5,7 @@
 
 namespace Liminal
 {
-	class LIMINAL_API ImGuiLayer : public Layer
+	class ImGuiLayer : public Layer
 	{
 	public:
 		ImGuiLayer();
@@ -15,5 +15,7 @@ namespace Liminal
 		void OnDetach() override;
 		void OnUpdate() override;
 		void OnEvent() override;
+	private:
+		float m_Time = 0.0f;
 	};
 }

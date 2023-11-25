@@ -7,7 +7,7 @@
 
 namespace Liminal
 {
-	class LIMINAL_API LayerStack
+	class LayerStack
 	{
 	public:
 		LayerStack();

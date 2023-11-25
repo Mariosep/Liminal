@@ -27,7 +27,8 @@ namespace Liminal
 		io.BackendFlags |= ImGuiBackendFlags_HasSetMousePos;
 
 		Application& app = Application::Get();
-		ImGui_ImplGlfw_InitForOpenGL(app.GetWindow(), true);
+
+		//ImGui_ImplGlfw_InitForOpenGL(app.GetWindow(), true);
 		ImGui_ImplOpenGL3_Init("#version 330");
 	}
 
@@ -37,8 +38,16 @@ namespace Liminal
 
 	void ImGuiLayer::OnUpdate()
 	{
+		ImGuiIO& io = ImGui::GetIO();
+		Application& app = Application::Get();
+		io.DisplaySize = ImVec2((float)app.GetWindow().GetWidth(), (float)app.GetWindow().GetHeight());
+
+		float time = (float)glfwGetTime();
+		io.DeltaTime = m_Time > 0.0f ? (time - m_Time) : (1.0f / 60.0f);
+		m_Time = time;
+		
 		ImGui_ImplOpenGL3_NewFrame();
-		ImGui_ImplGlfw_NewFrame();
+		//ImGui_ImplGlfw_NewFrame();
 		ImGui::NewFrame();
 
 		ImGui::Begin("Hello World");

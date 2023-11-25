@@ -12,4 +12,8 @@
 #include <unordered_map>
 #include <unordered_set>
 
-#include <Windows.h>
+#include "Liminal/Log.h"
+
+#ifdef LM_PLATFORM_WINDOWS
+	#include <Windows.h>
+#endif
