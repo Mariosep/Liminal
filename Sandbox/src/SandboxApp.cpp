@@ -18,8 +18,7 @@ class Sandbox : public Liminal::Application
 public:
 	Sandbox() : Liminal::Application()
 	{
-		//PushLayer(new ExampleLayer());
-		PushOverlay(new Liminal::ImGuiLayer());
+		
 	}
 
 	using Liminal::Application::Application;

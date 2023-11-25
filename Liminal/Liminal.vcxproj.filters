@@ -57,10 +57,10 @@
     <ClCompile Include="Dependencies\include\glad\glad.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Liminal\Render\RendererLayer.cpp">
+    <ClCompile Include="src\Liminal\Window.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Liminal\Window.cpp">
+    <ClCompile Include="src\Liminal\Renderer\OpenGLContext.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -122,10 +122,13 @@
     <ClInclude Include="Dependencies\include\imgui\imstb_truetype.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Liminal\Render\RendererLayer.h">
+    <ClInclude Include="src\Liminal\Window.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Liminal\Window.h">
+    <ClInclude Include="src\Liminal\Renderer\GraphicsContext.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Liminal\Renderer\OpenGLContext.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

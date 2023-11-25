@@ -1,6 +1,8 @@
 #include "lmpch.h"
 #include "Window.h"
 
+#include <GLFW/glfw3.h>
+
 namespace Liminal
 {
 	static bool s_GLFWInitialized = false;
@@ -22,9 +24,9 @@ namespace Liminal
 
 	void Window::Init(const WindowProps& props)
 	{
-		data.title = props.title;
-		data.width = props.width;
-		data.height = props.height;
+		m_Data.title = props.title;
+		m_Data.width = props.width;
+		m_Data.height = props.height;
 
 		LM_CORE_INFO("Creating window {0} ({1}, {2})", props.title, props.width, props.height);
 
@@ -36,19 +38,20 @@ namespace Liminal
 			s_GLFWInitialized = true;
 		}
 
-		window = glfwCreateWindow((int)props.width, (int)props.height, props.title.c_str(), nullptr, nullptr);
-		glfwMakeContextCurrent(window);
-		glfwSetWindowUserPointer(window, &data);
-		SetVSync(true);
+		m_Window = glfwCreateWindow((int)props.width, (int)props.height, props.title.c_str(), nullptr, nullptr);
 
-		int success = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
-		LM_CORE_ASSERT(success, "Could not initialize GLAD");
+		m_Context = new OpenGLContext(m_Window );
+		m_Context->Init();
+
+		
+		glfwSetWindowUserPointer(m_Window, &m_Data);
+		SetVSync(true);
 	}
 
 	void Window::OnUpdate()
 	{
-		glfwSwapBuffers(window);
 		glfwPollEvents();
+		m_Context->SwapBuffers();
 	}
 
 	void Window::SetVSync(bool enabled)
@@ -58,16 +61,16 @@ namespace Liminal
 		else
 			glfwSwapInterval(0);
 
-		data.vsync = enabled;
+		m_Data.vsync = enabled;
 	}
 
 	bool  Window::IsVSync() const
 	{
-		return data.vsync;
+		return m_Data.vsync;
 	}
 
 	void Window::Shutdown()
 	{
-		glfwDestroyWindow(window);
+		glfwDestroyWindow(m_Window);
 	}
 }

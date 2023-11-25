@@ -124,7 +124,7 @@
     <ClCompile Include="Dependencies\include\imgui\imgui_widgets.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="src\Liminal\Render\RendererLayer.cpp" />
+    <ClCompile Include="src\Liminal\Renderer\OpenGLContext.cpp" />
     <ClCompile Include="src\Liminal\Layer.cpp" />
     <ClCompile Include="src\Liminal\UI\ImGuiLayer.cpp" />
     <ClCompile Include="src\Liminal\LayerStack.cpp" />
@@ -149,7 +149,8 @@
     <ClInclude Include="Dependencies\include\imgui\imstb_rectpack.h" />
     <ClInclude Include="Dependencies\include\imgui\imstb_textedit.h" />
     <ClInclude Include="Dependencies\include\imgui\imstb_truetype.h" />
-    <ClInclude Include="src\Liminal\Render\RendererLayer.h" />
+    <ClInclude Include="src\Liminal\Renderer\OpenGLContext.h" />
+    <ClInclude Include="src\Liminal\Renderer\GraphicsContext.h" />
     <ClInclude Include="src\Liminal\UI\ImGuiLayer.h" />
     <ClInclude Include="src\Liminal\LayerStack.h" />
     <ClInclude Include="src\Liminal\Layer.h" />

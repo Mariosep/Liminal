@@ -2,8 +2,7 @@
 
 #include "lmpch.h"
 #include "Liminal/Core.h"
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
+#include "Liminal/Renderer/OpenGLContext.h"
 
 namespace Liminal
 {
@@ -27,21 +26,21 @@ namespace Liminal
 
 		void OnUpdate();
 
-		inline unsigned int GetWidth() const { return data.width; }
-		inline unsigned int GetHeight() const { return data.height; }
+		inline unsigned int GetWidth() const { return m_Data.width; }
+		inline unsigned int GetHeight() const { return m_Data.height; }
 
 		// Window attributes 
 		inline void SetEventCallback(/*const EventCallbackFn& callback*/) /*{ data.eventCallback = callback }*/;
 		void SetVSync(bool enabled);
 		bool IsVSync() const;
 
-
 		static Window* Create(const WindowProps& props = WindowProps());
 	private:
 		void Init(const WindowProps& props);
 		void Shutdown();
 	private:
-		GLFWwindow* window;
+		GLFWwindow* m_Window;
+		GraphicsContext* m_Context;
 
 		struct WindowData
 		{
@@ -52,6 +51,6 @@ namespace Liminal
 			//EventCallbackFn eventCallback;
 		};
 
-		WindowData data;
+		WindowData m_Data;
 	};
 }

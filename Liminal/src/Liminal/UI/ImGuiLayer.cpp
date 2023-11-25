@@ -6,6 +6,8 @@
 #include <imgui/imgui_impl_opengl3.h>
 #include "Liminal/Application.h"
 
+#include <GLFW/glfw3.h>
+
 namespace Liminal
 {
 	ImGuiLayer::ImGuiLayer() 
